@@ -29,7 +29,8 @@ public enum SpriteRendererType
     BOMB,
     START_EXPLIOSION,
     MIDDLE_EXPLIOSION,
-    END_EXPLIOSION
+    END_EXPLIOSION,
+    BRICK_DESTROYED
 }
 
 [System.Serializable]

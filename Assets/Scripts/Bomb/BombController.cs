@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class BombController : MonoBehaviour
     public Explosion ExplosionPrefab;
     public float ExplosionDuration = 1f;
     public int ExplosinRadius = 1;
+
+    [Header("Destructable")]
+    public Tilemap DestructableTile;
+    public Destructable DestructablePrefab;
 
     private void OnEnable()
     {
@@ -74,7 +79,10 @@ public class BombController : MonoBehaviour
         position += direction;
 
         if (Physics2D.OverlapBox(position, Vector2.one / 2, 0f, ExplosionLayerMask))
+        {
+            ClearDestructable(position);
             return;
+        }
 
         Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
         explosion.SetActiveRenderer(length > 1 ? SpriteRendererType.MIDDLE_EXPLIOSION : SpriteRendererType.END_EXPLIOSION);
@@ -83,6 +91,7 @@ public class BombController : MonoBehaviour
         Explode(position, direction, --length);
     }
 
+
     private Vector2 RoundPosition(Vector2 position)
     {
         float x = MathF.Round(position.x);
@@ -90,6 +99,18 @@ public class BombController : MonoBehaviour
         return new Vector2(x, y);
     }
 
+    private void ClearDestructable(Vector2 position)
+    {
+        Vector3Int cell = DestructableTile.WorldToCell(position);
+        TileBase tile = DestructableTile.GetTile(cell);
+        if(tile != null)
+        {
+            Instantiate(DestructablePrefab, position, Quaternion.identity);
+            DestructableTile.SetTile(cell, null);
+        }
+    }
+    
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<CircleCollider2D>(out var a))

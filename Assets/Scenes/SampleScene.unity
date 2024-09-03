@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 20044190}
   - component: {fileID: 20044189}
   - component: {fileID: 20044188}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Destructables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,12 +980,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyCodeBomb: 32
-  bombPrefab: {fileID: 5105750786771336177, guid: ec5be66d2af7a6246ae3babb5904cf8c, type: 3}
-  timeToDestroy: 1
-  bombAmaount: 3
-  explosionPrefab: {fileID: 165847235487491854, guid: 36bedaafc1b2ce04e8fd9b4acf30b966, type: 3}
-  explosionDuration: 0.5
-  explosinRadius: 1
+  BombPrefab: {fileID: 5105750786771336177, guid: ec5be66d2af7a6246ae3babb5904cf8c, type: 3}
+  TimeToDestroy: 4
+  BombAmaount: 1
+  ExplosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  ExplosionPrefab: {fileID: 165847235487491854, guid: 36bedaafc1b2ce04e8fd9b4acf30b966, type: 3}
+  ExplosionDuration: 1
+  ExplosinRadius: 1
+  DestructableTile: {fileID: 20044190}
+  DestructablePrefab: {fileID: 841284556894228224, guid: afbbe852eaa681c498db7a3d8b3bd9d4, type: 3}
 --- !u!1 &488793876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,7 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationTime: 0.1666667
-  idleSprite: {fileID: 457474356617978424, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
+  IdleSprite: {fileID: 457474356617978424, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
   SpriteRendererType: 2
   Idle: 0
   _spriteRenderer: {fileID: 488793879}
@@ -1232,7 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationTime: 0.1666667
-  idleSprite: {fileID: 4105455241530701441, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
+  IdleSprite: {fileID: 4105455241530701441, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
   SpriteRendererType: 4
   Idle: 0
   _spriteRenderer: {fileID: 768920296}
@@ -1392,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationTime: 0.1666667
-  idleSprite: {fileID: -7679691229697230091, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
+  IdleSprite: {fileID: -7679691229697230091, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
   SpriteRendererType: 1
   Idle: 0
   _spriteRenderer: {fileID: 1115704791}
@@ -1415,7 +1420,7 @@ GameObject:
   - component: {fileID: 1142816073}
   - component: {fileID: 1142816072}
   - component: {fileID: 1142816075}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Indestructables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5721,7 +5726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationTime: 0.1666667
-  idleSprite: {fileID: 1876993990684628349, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
+  IdleSprite: {fileID: 1876993990684628349, guid: 22cd15ec83fed3b4db95f16835a5416d, type: 3}
   SpriteRendererType: 3
   Idle: 0
   _spriteRenderer: {fileID: 1600597498}
@@ -5889,6 +5894,8 @@ MonoBehaviour:
   - Type: 7
     AnimatedSpriteRenderer: {fileID: 0}
   - Type: 8
+    AnimatedSpriteRenderer: {fileID: 0}
+  - Type: 9
     AnimatedSpriteRenderer: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
