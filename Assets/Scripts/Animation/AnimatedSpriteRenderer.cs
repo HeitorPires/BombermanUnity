@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimatedSpriteRenderer : MonoBehaviour
 {
     public float AnimationTime = .25f;
-    public Sprite idleSprite;
+    public Sprite IdleSprite;
     public SpriteRendererType SpriteRendererType;
     public bool Idle;
 
@@ -17,6 +17,11 @@ public class AnimatedSpriteRenderer : MonoBehaviour
     private void Awake()
     {
         OnValidate();
+    }
+
+    void Init()
+    {
+        AnimatedSpriteRendererManager.Instance.AssociateRenderes(SpriteRendererType, this);
     }
 
     private void OnValidate()
@@ -34,12 +39,9 @@ public class AnimatedSpriteRenderer : MonoBehaviour
         _spriteRenderer.enabled = false;
     }
 
-    public void StartAnimation()
-    {
-    }
-
     private void Start()
     {
+        Init();
         InvokeRepeating(nameof(NextFrame), AnimationTime, AnimationTime);
     }
 
@@ -50,8 +52,9 @@ public class AnimatedSpriteRenderer : MonoBehaviour
             _index = 0;
 
         if (Idle)
-            _spriteRenderer.sprite = idleSprite;
-        else
+            _spriteRenderer.sprite = IdleSprite;
+        else if(_index <  _sprites.Count)
             _spriteRenderer.sprite = _sprites[_index];
     }
+
 }

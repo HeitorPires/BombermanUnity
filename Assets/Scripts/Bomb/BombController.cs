@@ -2,52 +2,92 @@ using System;
 using System.Collections;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BombController : MonoBehaviour
 {
-
+    [Header("Input")]
     public KeyCode KeyCodeBomb = KeyCode.Space;
 
-    public GameObject bombPrefab;
-    public float timeToDestroy = 4f;
-    public int bombAmaount = 1;
+    [Header("Bomb")]
+    public GameObject BombPrefab;
+    public float TimeToDestroy = 4f;
+    public int BombAmaount = 1;
+    private int BombsRemaning;
 
-    private int bombsRemaning;
-
+    [Header("Explosion")]
+    public LayerMask ExplosionLayerMask;
+    public Explosion ExplosionPrefab;
+    public float ExplosionDuration = 1f;
+    public int ExplosinRadius = 1;
 
     private void OnEnable()
     {
-        bombsRemaning = bombAmaount;
+        BombsRemaning = BombAmaount;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCodeBomb) && bombsRemaning > 0)
+        if (Input.GetKeyDown(KeyCodeBomb) && BombsRemaning > 0)
         {
             StartCoroutine(PlaceBombCoroutine());
         }
     }
 
-    private void PlaceBomb()
-    {
 
-    }
 
     IEnumerator PlaceBombCoroutine()
     {
-        Vector2 position = transform.position;
-        position.x = MathF.Round(position.x);
-        position.y = MathF.Round(position.y);
+        Vector2 position = RoundPosition(transform.position);
 
-        GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
+        GameObject bomb = Instantiate(BombPrefab, position, Quaternion.identity);
 
-        bombsRemaning--;
+        BombsRemaning--;
 
-        yield return new WaitForSeconds(timeToDestroy);
+        yield return new WaitForSeconds(TimeToDestroy);
 
+            
         Destroy(bomb);
-        bombsRemaning++;
+        BombsRemaning++;
+        position = RoundPosition(bomb.transform.position);
+        HandleExplosion(position);
+    }
 
+    private void HandleExplosion(Vector2 position)
+    {
+        Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
+        explosion.SetActiveRenderer(SpriteRendererType.START_EXPLIOSION);
+        Destroy(explosion.gameObject, ExplosionDuration);
+
+        Explode(position, Vector2.up, ExplosinRadius);
+        Explode(position, Vector2.down, ExplosinRadius);
+        Explode(position, Vector2.left, ExplosinRadius);
+        Explode(position, Vector2.right, ExplosinRadius);
+
+    }
+
+    private void Explode(Vector2 position, Vector2 direction, int length)
+    {
+        if (length <= 0)
+            return;
+
+        position += direction;
+
+        if (Physics2D.OverlapBox(position, Vector2.one / 2, 0f, ExplosionLayerMask))
+            return;
+
+        Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
+        explosion.SetActiveRenderer(length > 1 ? SpriteRendererType.MIDDLE_EXPLIOSION : SpriteRendererType.END_EXPLIOSION);
+        explosion.SetDirection(direction);
+        Destroy(explosion.gameObject, ExplosionDuration);
+        Explode(position, direction, --length);
+    }
+
+    private Vector2 RoundPosition(Vector2 position)
+    {
+        float x = MathF.Round(position.x);
+        float y = MathF.Round(position.y);
+        return new Vector2(x, y);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -55,5 +95,7 @@ public class BombController : MonoBehaviour
         if (collision.TryGetComponent<CircleCollider2D>(out var a))
             a.isTrigger = false;
     }
+
+
 
 }

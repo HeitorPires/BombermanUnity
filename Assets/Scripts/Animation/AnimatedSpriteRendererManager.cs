@@ -8,6 +8,12 @@ public class AnimatedSpriteRendererManager : Singleton<AnimatedSpriteRendererMan
 
     [SerializeField] private List<SpriteRendererSetup> _renderers;
 
+    public void AssociateRenderes(SpriteRendererType type, AnimatedSpriteRenderer renderer)
+    {
+        _renderers.ForEach(i => { if(i.Type == type) i.AnimatedSpriteRenderer = renderer; });
+    }
+
+
     public SpriteRendererSetup GetSpriteRendererByType(SpriteRendererType type) => _renderers.Find(i => i.Type == type);
 
 
@@ -20,7 +26,10 @@ public enum SpriteRendererType
     DOWN,
     LEFT,
     RIGHT,
-    BOMB
+    BOMB,
+    START_EXPLIOSION,
+    MIDDLE_EXPLIOSION,
+    END_EXPLIOSION
 }
 
 [System.Serializable]

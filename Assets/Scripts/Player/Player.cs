@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public KeyCode KeyCodeDown = KeyCode.S;
     public KeyCode KeyCodeLeft = KeyCode.A;
     public KeyCode KeyCodeRight = KeyCode.D;
+    //public KeyCode KeyCodeBomb = KeyCode.X;
 
     [Header("SpriteAnimation")]
     [SerializeField] private List<AnimatedSpriteRenderer> _animatedSpriteRenderers;
@@ -20,11 +21,16 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Vector2 _moveDirection = Vector2.down; //start sprite
 
+    //[Header("Bombs")]
+    //[SerializeField] private BombController _bombPrefab;
+    //private int _bombNumbers = 1;
+    //private int _bombsRemaining;
 
     private void Awake()
     {
         OnValidate();
         _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.SpriteRendererType == SpriteRendererType.DOWN);
+        //_bombsRemaining = _bombNumbers;
     }
 
     private void OnValidate()
