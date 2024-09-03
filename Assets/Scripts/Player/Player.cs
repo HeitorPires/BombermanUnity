@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [Header("Inputs")]
     public KeyCode KeyCodeUp = KeyCode.W;
     public KeyCode KeyCodeDown = KeyCode.S;
     public KeyCode KeyCodeLeft = KeyCode.A;
     public KeyCode KeyCodeRight = KeyCode.D;
-    public KeyCode KeyCodeBomb = KeyCode.X;
 
-    [SerializeField] private float _speed = 1f;
+    [Header("SpriteAnimation")]
     [SerializeField] private List<AnimatedSpriteRenderer> _animatedSpriteRenderers;
-    private Vector2 _moveDirection = Vector2.down; //start sprite
-    private Rigidbody2D _rigidbody2D;
+    [SerializeField] private float _speed = 1f;
     private AnimatedSpriteRenderer _currentSpriteRenderer;
+
+    [Header("Movement")]
+    private Rigidbody2D _rigidbody2D;
+    private Vector2 _moveDirection = Vector2.down; //start sprite
 
 
     private void Awake()
@@ -70,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
             _moveDirection = Vector2.zero;
             HandleAnimation(SpriteRendererType.IDLE);
         }
-
     }
 
     private void SetDirection(Vector2 newDirection)
@@ -80,8 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleAnimation(SpriteRendererType type)
     {
-
-
 
         foreach (AnimatedSpriteRenderer sr in _animatedSpriteRenderers)
         {
@@ -96,8 +95,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _currentSpriteRenderer.Idle = type == SpriteRendererType.IDLE;
-        if(_currentSpriteRenderer.Idle)
+        if (_currentSpriteRenderer.Idle)
             _currentSpriteRenderer.enabled = true;
 
     }
+
+    
+
+
+
+
 }

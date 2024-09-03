@@ -967,6 +967,7 @@ MonoBehaviour:
   - {fileID: 488793878}
   - {fileID: 1600597497}
   - {fileID: 768920295}
+  _bombPrefab: {fileID: 5509120844492312539, guid: ec5be66d2af7a6246ae3babb5904cf8c, type: 3}
 --- !u!1 &488793876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,58 +5865,7 @@ MonoBehaviour:
   - Type: 4
     AnimatedSpriteRenderer: {fileID: 768920295}
   - Type: 5
-    AnimatedSpriteRenderer: {fileID: 2021727340}
---- !u!1 &2021727339
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2021727341}
-  - component: {fileID: 2021727340}
-  m_Layer: 0
-  m_Name: Bomb
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2021727340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021727339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeaa73bd5e198494481b234eb07e0f9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimationTime: 0.25
-  idleSprite: {fileID: 0}
-  SpriteRendererType: 0
-  Idle: 0
-  _spriteRenderer: {fileID: 0}
-  _sprites: []
-  _isLoop: 1
---- !u!4 &2021727341
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021727339}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.0412445, y: 0.6063272, z: -0.016284117}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+    AnimatedSpriteRenderer: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5924,4 +5874,3 @@ SceneRoots:
   - {fileID: 1717287328}
   - {fileID: 365511193}
   - {fileID: 1324453578}
-  - {fileID: 2021727341}
