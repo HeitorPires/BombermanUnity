@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f305d5a33abd16a45b556251d12ac0bc, type: 3}
   m_Name: SO Stats
   m_EditorClassIdentifier: 
-  Speed: 3
-  ExplosionStrenght: 3
+  Speed: 2
+  ExplosionStrenght: 1

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool IsDead { get; private set; } = false;
     public SOStats SOStats;
-    private bool _isDead = false;
     public string explosionLayer = "Explosion";
 
     [Header("Inputs")]
@@ -39,11 +39,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         GatherInput();
+        Debug.Log(gameObject.name);
     }
 
     private void FixedUpdate()
     {
-        if (!_isDead)
+        if (!IsDead)
         {
             Vector2 position = _rigidbody2D.position;
             Vector2 translation = SOStats.Speed * Time.fixedDeltaTime * _moveDirection;
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
     private void GatherInput()
     {
 
-        if (!_isDead)
+        if (!IsDead)
         {
             if (Input.GetKey(KeyCodeUp))
             {
@@ -118,10 +119,10 @@ public class Player : MonoBehaviour
 
     private void KillPlayer()
     {
-        _isDead = true;
+        IsDead = true;
         GetComponent<BombController>().enabled = false;
         HandleAnimation(SpriteRendererType.DEAD);
-        Destroy(gameObject, 1.5f);
+        Invoke(nameof(GameManager.Instance.CheckWinState), 2.5f);
     }
 
 }
