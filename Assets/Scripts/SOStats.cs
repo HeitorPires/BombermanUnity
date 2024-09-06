@@ -19,7 +19,7 @@ public class SOStats : ScriptableObject
 
     public void ResetSO()
     {
-        Speed = 1;
+        Speed = 2;
         ExplosionStrenght = 1;
         BombAmount = 1;
     }

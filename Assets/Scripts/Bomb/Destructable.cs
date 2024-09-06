@@ -11,6 +11,6 @@ public class Destructable : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        PowerUpSpawner.Instance.SpawnPowerUp(transform.position);
     }
 }
