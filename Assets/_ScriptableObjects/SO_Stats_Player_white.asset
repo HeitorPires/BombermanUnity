@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f305d5a33abd16a45b556251d12ac0bc, type: 3}
-  m_Name: SO Stats
+  m_Name: SO_Stats_Player_white
   m_EditorClassIdentifier: 
   Speed: 2
   ExplosionStrenght: 1
