@@ -99,8 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationTime: 0.125
   IdleSprite: {fileID: 0}
-  SpriteRendererType: 8
+  ItemSpriteType: 4
+  PlayerSpriteType: 0
   Idle: 0
+  isPlayer: 0
   _spriteRenderer: {fileID: 7638356432087910642}
   _sprites:
   - {fileID: 8454112987747502049, guid: 77378393eaf3fe04387b1941d248dabf, type: 3}
@@ -211,8 +213,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationTime: 0.125
   IdleSprite: {fileID: 0}
-  SpriteRendererType: 6
+  ItemSpriteType: 2
+  PlayerSpriteType: 0
   Idle: 0
+  isPlayer: 0
   _spriteRenderer: {fileID: 451145433642526201}
   _sprites:
   - {fileID: -6199642483750245169, guid: e047a80dd0eff124dbb3b43a58792cb9, type: 3}
@@ -420,8 +424,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationTime: 0.125
   IdleSprite: {fileID: 0}
-  SpriteRendererType: 7
+  ItemSpriteType: 3
+  PlayerSpriteType: 0
   Idle: 0
+  isPlayer: 0
   _spriteRenderer: {fileID: 7114434870376836310}
   _sprites:
   - {fileID: -8745954093093991765, guid: 564bb63966a357540a9f5ec5b94c4d2b, type: 3}

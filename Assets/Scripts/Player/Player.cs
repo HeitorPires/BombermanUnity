@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,6 +7,7 @@ public class Player : MonoBehaviour
     public bool IsDead { get; private set; } = false;
     public SOStats SOStats;
     public string explosionLayer = "Explosion";
+    public string PlayerKey {  get; private set; }
 
     [Header("Inputs")]
     public KeyCode KeyCodeUp = KeyCode.W;
@@ -21,13 +21,18 @@ public class Player : MonoBehaviour
 
     [Header("Movement")]
     private Rigidbody2D _rigidbody2D;
-    private Vector2 _moveDirection = Vector2.down; //start sprite
+    private Vector2 _moveDirection = Vector2.up; //start sprite
 
     private void Awake()
     {
         OnValidate();
         SOStats.ResetSO();
-        _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.SpriteRendererType == SpriteRendererType.DOWN);
+        PlayerKey = Guid.NewGuid().ToString();
+    }
+
+    private void Start()
+    {
+        _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.PlayerSpriteType == SpritePlayerType.UP);
     }
 
     private void OnValidate()
@@ -39,7 +44,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         GatherInput();
-        Debug.Log(gameObject.name);
     }
 
     private void FixedUpdate()
@@ -60,27 +64,27 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCodeUp))
             {
                 SetDirection(Vector2.up);
-                HandleAnimation(SpriteRendererType.UP);
+                HandleAnimation(SpritePlayerType.UP);
             }
             else if (Input.GetKey(KeyCodeDown))
             {
                 SetDirection(Vector2.down);
-                HandleAnimation(SpriteRendererType.DOWN);
+                HandleAnimation(SpritePlayerType.DOWN);
             }
             else if (Input.GetKey(KeyCodeLeft))
             {
                 SetDirection(Vector2.left);
-                HandleAnimation(SpriteRendererType.LEFT);
+                HandleAnimation(SpritePlayerType.LEFT);
             }
             else if (Input.GetKey(KeyCodeRight))
             {
                 SetDirection(Vector2.right);
-                HandleAnimation(SpriteRendererType.RIGHT);
+                HandleAnimation(SpritePlayerType.RIGHT);
             }
             else
             {
                 _moveDirection = Vector2.zero;
-                HandleAnimation(SpriteRendererType.IDLE);
+                HandleAnimation(SpritePlayerType.IDLE);
             }
         }
     }
@@ -90,12 +94,13 @@ public class Player : MonoBehaviour
         _moveDirection = newDirection;
     }
 
-    private void HandleAnimation(SpriteRendererType type)
+    private void HandleAnimation(SpritePlayerType type)
     {
 
         foreach (AnimatedSpriteRenderer sr in _animatedSpriteRenderers)
         {
-            var a = AnimatedSpriteRendererManager.Instance.GetSpriteRendererByType(sr.SpriteRendererType);
+            var a = AnimatedSpriteRendererManager.Instance.GetSpriteRendererByType(PlayerKey, sr.PlayerSpriteType);
+            if (a == null) return;
             if (a.Type == type)
             {
                 a.AnimatedSpriteRenderer.enabled = true;
@@ -105,7 +110,7 @@ public class Player : MonoBehaviour
                 a.AnimatedSpriteRenderer.enabled = false;
         }
 
-        _currentSpriteRenderer.Idle = type == SpriteRendererType.IDLE;
+        _currentSpriteRenderer.Idle = type == SpritePlayerType.IDLE;
         if (_currentSpriteRenderer.Idle)
             _currentSpriteRenderer.enabled = true;
 
@@ -121,7 +126,7 @@ public class Player : MonoBehaviour
     {
         IsDead = true;
         GetComponent<BombController>().enabled = false;
-        HandleAnimation(SpriteRendererType.DEAD);
+        HandleAnimation(SpritePlayerType.DEAD);
         Invoke(nameof(GameManager.Instance.CheckWinState), 2.5f);
     }
 

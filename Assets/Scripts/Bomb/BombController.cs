@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
     public SOStats SOStats;
+
 
     [Header("Input")]
     public KeyCode KeyCodeBomb = KeyCode.Space;
@@ -21,12 +23,18 @@ public class BombController : MonoBehaviour
     public float ExplosionDuration = 1f;
 
     [Header("Destructable")]
-    public Tilemap DestructableTile;
+    public string DestructableTilesTag;
+    public Tilemap DestructableTiles;
     public Destructable DestructablePrefab;
 
 
     private void Awake()
     {
+    }
+
+    private void Start()
+    {
+        Invoke(nameof(Init), .2f);
     }
 
     private void OnEnable()
@@ -38,6 +46,11 @@ public class BombController : MonoBehaviour
     private void OnDisable()
     {
         if (SOStats != null) SOStats.OnBombAmountIncrement -= IncrementBombsRemaning;
+    }
+
+    void Init()
+    {
+        DestructableTiles = FindObjectsOfType<Tilemap>().ToList().Find(i => i.CompareTag(DestructableTilesTag));
     }
 
     private void Update()
@@ -70,7 +83,7 @@ public class BombController : MonoBehaviour
     private void HandleExplosion(Vector2 position)
     {
         Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
-        explosion.SetActiveRenderer(SpriteRendererType.START_EXPLIOSION);
+        explosion.SetActiveRenderer(SpriteItemsType.START_EXPLIOSION);
         Destroy(explosion.gameObject, ExplosionDuration);
 
         Explode(position, Vector2.up, SOStats.ExplosionStrenght);
@@ -94,7 +107,7 @@ public class BombController : MonoBehaviour
         }
 
         Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
-        explosion.SetActiveRenderer(length > 1 ? SpriteRendererType.MIDDLE_EXPLIOSION : SpriteRendererType.END_EXPLIOSION);
+        explosion.SetActiveRenderer(length > 1 ? SpriteItemsType.MIDDLE_EXPLIOSION : SpriteItemsType.END_EXPLIOSION);
         explosion.SetDirection(direction);
         Destroy(explosion.gameObject, ExplosionDuration);
         Explode(position, direction, --length);
@@ -110,12 +123,12 @@ public class BombController : MonoBehaviour
 
     private void ClearDestructable(Vector2 position)
     {
-        Vector3Int cell = DestructableTile.WorldToCell(position);
-        TileBase tile = DestructableTile.GetTile(cell);
+        Vector3Int cell = DestructableTiles.WorldToCell(position);
+        TileBase tile = DestructableTiles.GetTile(cell);
         if(tile != null)
         {
             Instantiate(DestructablePrefab, position, Quaternion.identity);
-            DestructableTile.SetTile(cell, null);
+            DestructableTiles.SetTile(cell, null);
         }
     }
     

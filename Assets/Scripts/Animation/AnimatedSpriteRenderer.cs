@@ -6,8 +6,10 @@ public class AnimatedSpriteRenderer : MonoBehaviour
 {
     public float AnimationTime = .25f;
     public Sprite IdleSprite;
-    public SpriteRendererType SpriteRendererType;
+    public SpriteItemsType ItemSpriteType;
+    public SpritePlayerType PlayerSpriteType;
     public bool Idle;
+    public bool isPlayer;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private List<Sprite> _sprites;
@@ -17,11 +19,11 @@ public class AnimatedSpriteRenderer : MonoBehaviour
     private void Awake()
     {
         OnValidate();
+        Invoke(nameof(Init), .2f);
     }
 
     private void Start()
     {
-        Init();
         InvokeRepeating(nameof(NextFrame), AnimationTime, AnimationTime);
     }
 
@@ -29,6 +31,10 @@ public class AnimatedSpriteRenderer : MonoBehaviour
     private void OnValidate()
     {
         if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        var p = GetComponentInParent<Player>();
+        if(p != null)
+            isPlayer = true;
     }
 
     private void OnEnable()
@@ -43,7 +49,13 @@ public class AnimatedSpriteRenderer : MonoBehaviour
 
     void Init()
     {
-        AnimatedSpriteRendererManager.Instance.AssociateRenderes(SpriteRendererType, this);
+        if(isPlayer)
+        {
+            string name = GetComponentInParent<Player>().PlayerKey;
+            AnimatedSpriteRendererManager.Instance.AssociateRenderes(PlayerSpriteType, this, name);
+        }
+        else
+            AnimatedSpriteRendererManager.Instance.AssociateRenderes(ItemSpriteType, this);
     }
 
     private void NextFrame()

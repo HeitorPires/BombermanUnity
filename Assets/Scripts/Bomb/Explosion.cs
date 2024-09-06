@@ -6,11 +6,11 @@ public class Explosion : MonoBehaviour
 {
     public List<AnimatedSpriteRenderer> Renderers;
 
-    public void SetActiveRenderer(SpriteRendererType type)
+    public void SetActiveRenderer(SpriteItemsType type)
     {
         foreach (AnimatedSpriteRenderer ar in Renderers)
         {
-            if (ar.SpriteRendererType == type)
+            if (ar.ItemSpriteType == type)
                 ar.enabled = true;
             else
                 ar.enabled = false;
