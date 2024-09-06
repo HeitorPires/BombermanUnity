@@ -19,10 +19,12 @@ public class AnimatedSpriteRenderer : MonoBehaviour
         OnValidate();
     }
 
-    void Init()
+    private void Start()
     {
-        AnimatedSpriteRendererManager.Instance.AssociateRenderes(SpriteRendererType, this);
+        Init();
+        InvokeRepeating(nameof(NextFrame), AnimationTime, AnimationTime);
     }
+
 
     private void OnValidate()
     {
@@ -39,10 +41,9 @@ public class AnimatedSpriteRenderer : MonoBehaviour
         _spriteRenderer.enabled = false;
     }
 
-    private void Start()
+    void Init()
     {
-        Init();
-        InvokeRepeating(nameof(NextFrame), AnimationTime, AnimationTime);
+        AnimatedSpriteRendererManager.Instance.AssociateRenderes(SpriteRendererType, this);
     }
 
     private void NextFrame()

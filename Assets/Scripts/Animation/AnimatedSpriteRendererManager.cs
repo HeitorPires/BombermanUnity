@@ -30,7 +30,8 @@ public enum SpriteRendererType
     START_EXPLIOSION,
     MIDDLE_EXPLIOSION,
     END_EXPLIOSION,
-    BRICK_DESTROYED
+    BRICK_DESTROYED,
+    DEAD
 }
 
 [System.Serializable]
