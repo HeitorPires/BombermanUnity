@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     public List<AnimatedSpriteRenderer> Renderers;
+    public AudioClip clip;
 
     public void SetActiveRenderer(SpriteItemsType type)
     {

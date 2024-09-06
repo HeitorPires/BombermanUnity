@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SOStats: {fileID: 11400000, guid: d0b3dbba0bde79647b50e980adc8cb17, type: 2}
+  AudioClip: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
   KeyCodeBomb: 120
   BombPrefab: {fileID: 5105750786771336177, guid: ec5be66d2af7a6246ae3babb5904cf8c, type: 3}
   TimeToDestroy: 2.5

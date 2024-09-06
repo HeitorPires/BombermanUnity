@@ -6,8 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
-    public SOStats SOStats;
-
+    private SOStats _sOStats;
+    public AudioClip AudioClip;
 
     [Header("Input")]
     public KeyCode KeyCodeBomb = KeyCode.Space;
@@ -37,20 +37,17 @@ public class BombController : MonoBehaviour
         Invoke(nameof(Init), .2f);
     }
 
-    private void OnEnable()
-    {
-        BombsRemaning = SOStats.BombAmount;
-        if (SOStats != null) SOStats.OnBombAmountIncrement += IncrementBombsRemaning;
-    }
-
     private void OnDisable()
     {
-        if (SOStats != null) SOStats.OnBombAmountIncrement -= IncrementBombsRemaning;
+        if (_sOStats != null) _sOStats.OnBombAmountIncrement -= IncrementBombsRemaning;
     }
 
     void Init()
     {
         DestructableTiles = FindObjectsOfType<Tilemap>().ToList().Find(i => i.CompareTag(DestructableTilesTag));
+        _sOStats = GetComponent<Player>().SOStats;
+        if (_sOStats != null) _sOStats.OnBombAmountIncrement += IncrementBombsRemaning;
+        BombsRemaning = _sOStats.BombAmount;
     }
 
     private void Update()
@@ -68,7 +65,7 @@ public class BombController : MonoBehaviour
         Vector2 position = RoundPosition(transform.position);
 
         GameObject bomb = Instantiate(BombPrefab, position, Quaternion.identity);
-
+        SoundManagerSO.PlaySoundFXClip(AudioClip, transform.position, 1f, true);
         BombsRemaning--;
 
         yield return new WaitForSeconds(TimeToDestroy);
@@ -84,12 +81,13 @@ public class BombController : MonoBehaviour
     {
         Explosion explosion = Instantiate(ExplosionPrefab, position, Quaternion.identity);
         explosion.SetActiveRenderer(SpriteItemsType.START_EXPLIOSION);
+        SoundManagerSO.PlaySoundFXClip(explosion.clip, transform.position, 1f);
         Destroy(explosion.gameObject, ExplosionDuration);
 
-        Explode(position, Vector2.up, SOStats.ExplosionStrenght);
-        Explode(position, Vector2.down, SOStats.ExplosionStrenght);
-        Explode(position, Vector2.left, SOStats.ExplosionStrenght);
-        Explode(position, Vector2.right, SOStats.ExplosionStrenght);
+        Explode(position, Vector2.up, _sOStats.ExplosionStrenght);
+        Explode(position, Vector2.down, _sOStats.ExplosionStrenght);
+        Explode(position, Vector2.left, _sOStats.ExplosionStrenght);
+        Explode(position, Vector2.right, _sOStats.ExplosionStrenght);
 
     }
 

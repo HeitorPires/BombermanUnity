@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     [Header("Movement")]
     private Rigidbody2D _rigidbody2D;
-    private Vector2 _moveDirection = Vector2.up; //start sprite
+    private Vector2 _moveDirection = Vector2.down; //start sprite
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.PlayerSpriteType == SpritePlayerType.UP);
+        _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.PlayerSpriteType == SpritePlayerType.DOWN);
     }
 
     private void OnValidate()

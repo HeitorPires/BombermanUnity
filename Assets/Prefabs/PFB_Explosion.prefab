@@ -325,6 +325,7 @@ MonoBehaviour:
   - {fileID: 1201699992830855085}
   - {fileID: 6072894302139469988}
   - {fileID: 59066113318578974}
+  clip: {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
 --- !u!1 &6864627013630548314
 GameObject:
   m_ObjectHideFlags: 0

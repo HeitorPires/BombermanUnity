@@ -23,6 +23,4 @@ public class SOStats : ScriptableObject
         ExplosionStrenght = 1;
         BombAmount = 1;
     }
-
-
 }
