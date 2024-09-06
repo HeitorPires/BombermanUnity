@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
         IsDead = true;
         GetComponent<BombController>().enabled = false;
         HandleAnimation(SpritePlayerType.DEAD);
-        Invoke(nameof(GameManager.Instance.CheckWinState), 2.5f);
+        GameManager.Instance.CheckWinState();
     }
 
 }

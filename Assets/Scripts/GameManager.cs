@@ -7,11 +7,6 @@ public class GameManager : Singleton<GameManager>
 {
     public List<Player> playersInGame;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     private void Start()
     {
         playersInGame = FindObjectsOfType<Player>().ToList();
@@ -23,7 +18,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (player.IsDead)
             {
-                EndGame();
+                Invoke(nameof(EndGame), 3f);
             }
         }
     }

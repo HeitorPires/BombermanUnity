@@ -948,10 +948,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PFB_Player_Black
       objectReference: {fileID: 0}
-    - target: {fileID: 5082703363999896675, guid: a729d4e510e7b2e40bbac82abf4a41db, type: 3}
-      propertyPath: KeyCodeUp
-      value: 261
-      objectReference: {fileID: 0}
     - target: {fileID: 5157107103110540573, guid: a729d4e510e7b2e40bbac82abf4a41db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17
