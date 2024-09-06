@@ -5,32 +5,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public SOStats SOStats;
+
     [Header("Inputs")]
     public KeyCode KeyCodeUp = KeyCode.W;
     public KeyCode KeyCodeDown = KeyCode.S;
     public KeyCode KeyCodeLeft = KeyCode.A;
     public KeyCode KeyCodeRight = KeyCode.D;
-    //public KeyCode KeyCodeBomb = KeyCode.X;
 
     [Header("SpriteAnimation")]
     [SerializeField] private List<AnimatedSpriteRenderer> _animatedSpriteRenderers;
-    [SerializeField] private float _speed = 1f;
     private AnimatedSpriteRenderer _currentSpriteRenderer;
 
     [Header("Movement")]
     private Rigidbody2D _rigidbody2D;
     private Vector2 _moveDirection = Vector2.down; //start sprite
 
-    //[Header("Bombs")]
-    //[SerializeField] private BombController _bombPrefab;
-    //private int _bombNumbers = 1;
-    //private int _bombsRemaining;
-
     private void Awake()
     {
         OnValidate();
+        SOStats.ResetSO();
         _currentSpriteRenderer = _animatedSpriteRenderers.Find(i => i.SpriteRendererType == SpriteRendererType.DOWN);
-        //_bombsRemaining = _bombNumbers;
     }
 
     private void OnValidate()
@@ -47,7 +42,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 position = _rigidbody2D.position;
-        Vector2 translation = _speed * Time.fixedDeltaTime * _moveDirection;
+        Vector2 translation = SOStats.Speed * Time.fixedDeltaTime * _moveDirection;
         _rigidbody2D.MovePosition(position + translation);
     }
 
@@ -105,10 +100,10 @@ public class Player : MonoBehaviour
             _currentSpriteRenderer.enabled = true;
 
     }
-
-    
-
+}
 
 
+public struct Stats
+{
 
 }

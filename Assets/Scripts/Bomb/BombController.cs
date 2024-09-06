@@ -1,34 +1,43 @@
 using System;
 using System.Collections;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
+    public SOStats SOStats;
+
     [Header("Input")]
     public KeyCode KeyCodeBomb = KeyCode.Space;
 
     [Header("Bomb")]
     public GameObject BombPrefab;
     public float TimeToDestroy = 4f;
-    public int BombAmaount = 1;
     private int BombsRemaning;
 
     [Header("Explosion")]
     public LayerMask ExplosionLayerMask;
     public Explosion ExplosionPrefab;
     public float ExplosionDuration = 1f;
-    public int ExplosinRadius = 1;
 
     [Header("Destructable")]
     public Tilemap DestructableTile;
     public Destructable DestructablePrefab;
 
+
+    private void Awake()
+    {
+    }
+
     private void OnEnable()
     {
-        BombsRemaning = BombAmaount;
+        BombsRemaning = SOStats.BombAmount;
+        if (SOStats != null) SOStats.OnBombAmountIncrement += IncrementBombsRemaning;
+    }
+
+    private void OnDisable()
+    {
+        if (SOStats != null) SOStats.OnBombAmountIncrement -= IncrementBombsRemaning;
     }
 
     private void Update()
@@ -53,7 +62,7 @@ public class BombController : MonoBehaviour
 
             
         Destroy(bomb);
-        BombsRemaning++;
+        IncrementBombsRemaning();
         position = RoundPosition(bomb.transform.position);
         HandleExplosion(position);
     }
@@ -64,10 +73,10 @@ public class BombController : MonoBehaviour
         explosion.SetActiveRenderer(SpriteRendererType.START_EXPLIOSION);
         Destroy(explosion.gameObject, ExplosionDuration);
 
-        Explode(position, Vector2.up, ExplosinRadius);
-        Explode(position, Vector2.down, ExplosinRadius);
-        Explode(position, Vector2.left, ExplosinRadius);
-        Explode(position, Vector2.right, ExplosinRadius);
+        Explode(position, Vector2.up, SOStats.ExplosionStrenght);
+        Explode(position, Vector2.down, SOStats.ExplosionStrenght);
+        Explode(position, Vector2.left, SOStats.ExplosionStrenght);
+        Explode(position, Vector2.right, SOStats.ExplosionStrenght);
 
     }
 
@@ -117,6 +126,9 @@ public class BombController : MonoBehaviour
             a.isTrigger = false;
     }
 
-
+    private void IncrementBombsRemaning()
+    {
+        BombsRemaning++;
+    }
 
 }
