@@ -24,4 +24,5 @@ public class Explosion : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
     }
 
+
 }

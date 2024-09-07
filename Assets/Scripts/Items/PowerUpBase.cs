@@ -6,7 +6,8 @@ using UnityEngine;
 public class PowerUpBase : MonoBehaviour
 {
     public SOStats SOStats;
-    public LayerMask Layer;
+    public LayerMask LayerPlayer;
+    public LayerMask LayerExplosion;
 
 
     protected virtual void OnCollect()
@@ -16,9 +17,14 @@ public class PowerUpBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((1 << collision.gameObject.layer) & Layer) != 0)
+        if (((1 << collision.gameObject.layer) & LayerPlayer) != 0)
         {
             OnCollect();
+        }
+        
+        if (((1 << collision.gameObject.layer) & LayerExplosion) != 0)
+        {
+            Destroy(gameObject);
         }
     }
 

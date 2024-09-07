@@ -16,7 +16,7 @@ public class MainMenuEvents : MonoBehaviour
         _document = GetComponent<UIDocument>();
 
         _buttonLevel1 = _document.rootVisualElement.Q("Level1") as Button;
-        _buttonLevel2 = _document.rootVisualElement.Q("Level1") as Button;
+        _buttonLevel2 = _document.rootVisualElement.Q("Level2") as Button;
         _slider = _document.rootVisualElement.Q("PowerUpSpawnChance") as Slider;
 
         _buttonLevel1.RegisterCallback<ClickEvent>(evt => OnButtonLevelClick(1));
