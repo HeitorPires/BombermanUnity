@@ -1,0 +1,11 @@
+.button {
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(255, 255, 255, 0);
+    transition-duration: 0.35s;
+    transition-timing-function: linear;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    transition-timing-function: ease;
+}

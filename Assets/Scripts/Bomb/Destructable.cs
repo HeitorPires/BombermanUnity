@@ -3,6 +3,7 @@ using UnityEngine;
 public class Destructable : MonoBehaviour
 {
     public float DestructableTime = 1f;
+    public PowerUpSpawnerSO PowerUpSpawner;
 
     private void Start()
     {
@@ -11,6 +12,6 @@ public class Destructable : MonoBehaviour
 
     private void OnDestroy()
     {
-        PowerUpSpawner.Instance.SpawnPowerUp(transform.position);
+        PowerUpSpawner.SpawnPowerUp(transform.position);
     }
 }

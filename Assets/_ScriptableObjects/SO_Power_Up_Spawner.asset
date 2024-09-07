@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b9a9054fa136246877ddc901bf59af, type: 3}
+  m_Name: SO_Power_Up_Spawner
+  m_EditorClassIdentifier: 
+  _spawnChance: 0.25
+  powerUpsToSpawn:
+  - {fileID: 1321493085056709337, guid: aa9eefcbb6126624b868390e8b9dc84c, type: 3}
+  - {fileID: 2663554537136352321, guid: be04ed3e150a9414b8fb708dd0394071, type: 3}
+  - {fileID: 136536451978067373, guid: 2e0fde4d3d0c78949af2d89df275222c, type: 3}

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=b75f73bbeb3eb98418cba8cc6d3efd8a&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; color: rgb(255, 255, 255); background-color: rgba(255, 1, 1, 0); -unity-background-image-tint-color: rgb(255, 0, 0);">
+        <ui:Label tabindex="-1" text="MAIN MENU" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MainMenu" style="-unity-text-align: middle-center; -unity-font: url(&quot;project://database/Assets/UI%20pack/Fonts/Roboto-Regular.ttf?fileID=12800000&amp;guid=87234a9d13698654bb0d237fbcff721c&amp;type=3#Roboto-Regular&quot;); font-size: 50px;" />
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Level1" class="button" style="position: absolute; top: 331px; left: 282px; height: 409px; width: 584px; text-overflow: clip; background-image: url(&quot;project://database/Assets/Art/RectangleLevel.PNG?fileID=2800000&amp;guid=8358e028fdad7db45b8c18122a8e135b&amp;type=3#RectangleLevel&quot;);" />
+        <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Level2" class="button" style="position: absolute; top: 332px; left: 1014px; height: 405px; right: 292px; background-image: url(&quot;project://database/Assets/Art/SquareLevel.PNG?fileID=2800000&amp;guid=b35b9dad88f962d4f90a4ecbdf3ec949&amp;type=3#SquareLevel&quot;);" />
+        <ui:Slider label="Power Up Spawn Chance" show-input-field="true" name="PowerUpSpawnChance" high-value="100" class="textelement" style="top: 707px; left: 680px; height: 74px; width: 608px; color: rgb(0, 0, 0); -unity-text-align: middle-center; white-space: nowrap; text-overflow: ellipsis;" />
+    </ui:VisualElement>
+</ui:UXML>
